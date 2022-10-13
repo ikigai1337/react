@@ -28,7 +28,12 @@ function EditEmployee(props) {
         </Modal.Header>
         <Modal.Body>
 
-          <form id='editmodal' className="w-full max-w-sm">
+          <form onSubmit={(e) => {
+            handleClose();
+            e.preventDefault(); // prevents the page from refreshing
+            props.updateEmployee(props.id, name, role);
+          }} 
+          id='editmodal' className="w-full max-w-sm">
 
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3">
@@ -55,9 +60,10 @@ function EditEmployee(props) {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          {/* <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
+          </Button> */}
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" form='editmodal' onClick={handleClose} >Close</button>
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" form='editmodal' >Update</button>
         </Modal.Footer>
       </Modal>
